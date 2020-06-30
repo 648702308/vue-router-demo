@@ -1,13 +1,19 @@
 <template>
-    $END$
+  <div class="qualify">
+    <div class="">
+
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "Index"
-    }
+  export default {
+    name: "Qualify"
+  }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+  .qualify{
 
+  }
 </style>

@@ -7,7 +7,28 @@ import axios from 'axios'
 import store from './store'
 
 import './assets/css/reset.css'
+import './assets/css/animate.css'
+import './assets/css/iconfont.css'
+import './assets/css/common.css'
 import "./assets/flexible/flexible.js";
+import vueSwiper from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+
+Vue.use(vueSwiper)
+
+import ECharts from 'vue-echarts' // refers to components/ECharts.vue in webpack
+
+// import ECharts modules manually to reduce bundle size
+import 'echarts/lib/chart/radar'
+import 'echarts/lib/component/tooltip'
+
+
+// register component to use
+Vue.component('v-chart', ECharts)
+
+import components from './config/components.js'
+
+Vue.use(components)
 
 Vue.prototype.$title = process.env.TITLE;
 Vue.prototype.host = process.env.API_ROOT;
@@ -22,7 +43,7 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
+  components: {App},
   template: '<App/>',
   watch: {
     //监听屏幕宽度变化

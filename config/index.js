@@ -3,7 +3,30 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+// 定义自动获取本地ip的方法开始
+const os = require('os')
 
+function getNetworkIp() {
+  let needHost = '' // 打开的host
+  try {
+    // 获得网络接口列表
+    let network = os.networkInterfaces()
+    for (let dev in network) {
+      let iface = network[dev]
+      for (let i = 0; i < iface.length; i++) {
+        let alias = iface[i]
+        if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+          needHost = alias.address
+        }
+      }
+    }
+  } catch (e) {
+    needHost = 'localhost'
+  }
+  return needHost
+}
+
+// 定义自动获取本地ip的方法结束
 module.exports = {
   dev: {
 
@@ -13,14 +36,14 @@ module.exports = {
     proxyTable: {},
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: getNetworkIp(), // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */

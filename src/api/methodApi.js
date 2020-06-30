@@ -158,3 +158,49 @@ export function formatPrice(num) {
     return str;
   }
 }
+
+/**
+ * 当前星期数组
+ * @returns {*[]}
+ */
+export function makeWeek() {
+
+  let date = new Date();
+  let month = date.getMonth() + 1;
+  let week = date.getDay() ? date.getDay() : 7;
+  let day = date.getDate();
+  let weekStr = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期天"];
+  // week：周几，day：几号
+  let weekArr = [{week: '', day: ''}, {week: '', day: ''}, {week: '', day: ''}, {week: '', day: ''}, {
+    week: '',
+    day: ''
+  }, {week: '', day: ''}, {week: '', day: ''}];
+  // 本周内今天的前几天的数量
+  let leftNum = week - 1;
+  // 本周内今天的后几天的数量
+  let rightNum = 7 - week;
+  // 本周内今天的前几天
+  for (let i = 0; i < leftNum; i++) {
+    weekArr[i].after = -1;
+    weekArr[i].week = week - (week - i) + 1;
+    weekArr[i].weekstr = weekStr[week - (week - i)];
+    if (i == 0) {
+      weekArr[i].day = day - week;
+    } else {
+      weekArr[i].day = day - (week - i) + 1;
+    }
+  }
+  // 本周内今天的后几天
+  for (let i = 0; i < rightNum; i++) {
+    weekArr[i + week].after = 1;
+    weekArr[i + week].week = week + i + 1;
+    weekArr[i + week].day = day + i + 1;
+    weekArr[i + week].weekstr = weekStr[week + i];
+  }
+  // 今天
+  weekArr[week - 1].after = 0;
+  weekArr[week - 1].week = week;
+  weekArr[week - 1].day = day;
+  weekArr[week - 1].weekstr = weekStr[week - 1];
+  return weekArr
+}

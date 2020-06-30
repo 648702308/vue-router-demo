@@ -14,29 +14,7 @@ export default {
       setCookie(i, data[i], 7, "/");
     }
   },
-  setUserName(state, name) {
-    state.loginInfo.name = name;
-  },
-  setTopNavState(state, value) {
-    state.topNavState = value;
-  },
-  setLeftNavState(state, value) {
-    state.leftNavState = value;
-  },
-  setMenuNav(state, value) {
-    state.menuNav = value;
-  },
-  setLeftNavActive(state, value) {
-    state.leftNavActive = value;
-  },
-  setTopMenuNav(state, value) {
-    state.topMenuNav = value;
-  },
-  setShowAside(state, value) {
-    state.showAside = value;
-  },
-  setCollapse(state, value) {
-    state.collapse = value;
-    localStorage.setItem('collapse', value)
+  changeTransition (state, transitionName) {
+    state.transitionName = transitionName
   }
 }
